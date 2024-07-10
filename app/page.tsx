@@ -1,10 +1,15 @@
-import Navbar from "@/components/Navbar";
 
+import Navbar from "@/components/Navbar";
+import { NextUIProvider } from "@nextui-org/react";
 
 
 
 export default function Home() {
   return (
-    <Navbar/>
+    <NextUIProvider>
+      <Navbar/>
+    </NextUIProvider>
+    
+    
   );
 }
