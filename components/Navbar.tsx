@@ -1,8 +1,12 @@
+"use client"
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@nextui-org/react";
 import Image from "next/image";
+import { Link } from "react-router-dom";
 
 import logo from '@/public/logo.png'
+import ThemeSwitch from "./ThemeSwitch";
+
 
 export default function App() {
   return (
@@ -13,16 +17,22 @@ export default function App() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link  to='/home'>
             Features
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link to= "/dashboard" >
+            Dashboard
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link to='/login-signup' >Login</Link>
         </NavbarItem>
       </NavbarContent>
+      <ThemeSwitch />
     </Navbar>
   );
 }
