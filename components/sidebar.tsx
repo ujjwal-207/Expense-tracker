@@ -8,7 +8,7 @@ import { sidebarItems } from '@/data'
 
 const Sidebar = () => {
   return (
-    <div className=''>
+    <div className='flex flex-row'>
         <nav>
             <div className='flex flex-col  divide-x'>
                <Image src={logo} alt='' width={60} height={60} />
