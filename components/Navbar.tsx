@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export default function App() {
   return (
-    <Navbar isBordered>
+    <Navbar isBordered className="fixed">
       <NavbarBrand>
         <Image src={logo} alt="" width={100} height={100}/>
         <p className="font-bold text-3xl text-inherit">HSIAB</p>
