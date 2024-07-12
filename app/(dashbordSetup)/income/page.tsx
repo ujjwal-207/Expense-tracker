@@ -6,6 +6,7 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
   
 
 export default function Page(){
@@ -13,17 +14,21 @@ export default function Page(){
       <div >
         <Dialog>
           <div className=" gap-7 box-content">
-        <DialogTrigger>Enter Your Income</DialogTrigger>
+        <DialogTrigger asChild><div className=" p-10 rounded-md items-center 
+              flex flex-col border-2 border-dashed cursor-pointer hover:shadow-md"> 
+              <h2>+</h2>
+              <p>Add Your income</p>
+          </div></DialogTrigger>
         </div>
         <DialogContent>
           <DialogHeader>
+            <DialogTitle>Enter Your Income Source</DialogTitle>
+            <DialogDescription>
+             <Input />
+            </DialogDescription>
             <DialogTitle>Enter Your Income</DialogTitle>
             <DialogDescription>
-             <div>
-                <input  type="email"
-                    id="UserEmail"
-                    className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"></input>
-             </div>
+             <Input />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
