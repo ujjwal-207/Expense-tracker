@@ -5,7 +5,7 @@ export const sidebarItems = [
     },
     {
         lable : "Expence-Tracker",
-        href : "/expence-tracker",
+        href : "/expences",
     },
     {
         lable : "Income",
