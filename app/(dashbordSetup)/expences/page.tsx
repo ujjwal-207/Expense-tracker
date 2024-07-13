@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -10,6 +11,7 @@ import { Input } from "@/components/ui/input"
   
 
 export default function Page(){
+  
     return(
       <div >
         <Dialog>
@@ -22,19 +24,20 @@ export default function Page(){
         </div>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Enter Your Expences on</DialogTitle>
+            <DialogTitle>Enter About Your Expences</DialogTitle>
             <DialogDescription>
              <Input />
             </DialogDescription>
             <DialogTitle>Enter Your Amount</DialogTitle>
             <DialogDescription>
              <Input />
+             <div  className="pt-3">
+             <Button>Submit</Button>
+             </div>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
       </div>
-      
-        
     )
 }

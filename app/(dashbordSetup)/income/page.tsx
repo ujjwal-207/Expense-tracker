@@ -7,6 +7,7 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
   
 
 export default function Page(){
@@ -29,6 +30,9 @@ export default function Page(){
             <DialogTitle>Enter Your Income</DialogTitle>
             <DialogDescription>
              <Input />
+             <div  className="pt-3">
+             <Button>Submit</Button>
+             </div>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
