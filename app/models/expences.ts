@@ -8,7 +8,7 @@ const expencesSchema: Schema = new mongoose.Schema({
   expences: {
     id: Number,
     type: Number,
-    reqired: true,
+    required: true,
   },
   description: {
     id: Number,

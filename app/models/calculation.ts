@@ -8,7 +8,7 @@ const calculationSchema: Schema = new mongoose.Schema({
   income: {
     id: Number,
     type: Number,
-    reqired: true,
+    required: true,
   },
   description: {
     id: Number,

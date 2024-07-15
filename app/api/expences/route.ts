@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { income, description } = await request.json();
+    const { expences, description } = await request.json();
     await dbConnect();
-    await Expences.create({ income, description });
+    await Expences.create({ expences, description });
     return NextResponse.json(
       { message: "Message sent sucessfully" },
       { status: 201 }
