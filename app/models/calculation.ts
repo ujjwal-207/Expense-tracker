@@ -2,7 +2,6 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface Icalculation extends Document {
   income: number;
-  expences: number;
   description: string;
 }
 const calculationSchema: Schema = new mongoose.Schema({
@@ -10,11 +9,6 @@ const calculationSchema: Schema = new mongoose.Schema({
     id: Number,
     type: Number,
     reqired: true,
-  },
-  expences: {
-    id: Number,
-    type: Number,
-    required: true,
   },
   description: {
     id: Number,

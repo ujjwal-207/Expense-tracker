@@ -1,13 +1,13 @@
-import { dbConnect } from "@/lib/dbConnect";
-import Account from "@/models/calculation";
+import { dbConnect } from "@/app/lib/dbConnect";
+import Account from "@/app/models/calculation";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { income, expences, description } = await request.json();
+    const { income, description } = await request.json();
     await dbConnect();
-    await Account.create({ income, expences, description });
+    await Account.create({ income, description });
     return NextResponse.json(
       { message: "Message sent sucessfully" },
       { status: 201 }

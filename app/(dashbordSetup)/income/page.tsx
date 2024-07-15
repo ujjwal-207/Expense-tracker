@@ -15,7 +15,6 @@ import { useState } from "react";
 export default function Page() {
   const [inputState, setInputState] = useState({
     income: "",
-    expences: "",
     description: "",
   });
   //Fetching API endPoint
