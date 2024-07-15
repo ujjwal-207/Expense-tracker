@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface Icalculation extends Document {
-  income: number;
+  expences: number;
   description: string;
 }
-const calculationSchema: Schema = new mongoose.Schema({
-  income: {
+const expencesSchema: Schema = new mongoose.Schema({
+  expences: {
     id: Number,
     type: Number,
     reqired: true,
@@ -16,8 +16,8 @@ const calculationSchema: Schema = new mongoose.Schema({
     required: true,
   },
 });
-const Incomes =
+const Expences =
   mongoose.models.Account ||
-  mongoose.model<Icalculation>("Income", calculationSchema);
+  mongoose.model<Icalculation>("Expences", expencesSchema);
 
-export default Incomes;
+export default Expences;

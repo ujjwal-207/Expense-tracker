@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,8 +10,27 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export default function Page() {
+  const [expenceState, setExpenceState] = useState({
+    expence: "",
+    description: "",
+  });
+  //Fetching API endPoint
+  const handelEntry = async (e) => {
+    e.preventDefault();
+    let res = await fetch("/api/expences", {
+      method: "POST",
+      body: JSON.stringify(expenceState),
+    });
+  };
+  const handelChange = async (e) => {
+    setExpenceState((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
+  };
   return (
     <div>
       <Dialog>
@@ -28,13 +49,13 @@ export default function Page() {
           <DialogHeader>
             <DialogTitle>Enter About Your Expences</DialogTitle>
             <DialogDescription>
-              <Input />
+              <Input onChange={handelChange} />
             </DialogDescription>
             <DialogTitle>Enter Your Amount</DialogTitle>
             <DialogDescription>
-              <Input />
+              <Input onChange={handelChange} />
               <div className="pt-3">
-                <Button>Submit</Button>
+                <Button onClick={handelEntry}>Submit</Button>
               </div>
             </DialogDescription>
           </DialogHeader>
