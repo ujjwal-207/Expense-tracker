@@ -21,7 +21,7 @@ export default function Page() {
   //Fetching API endPoint
   const handelEntry = async (e) => {
     e.preventDefault();
-    let res = await fetch("/api/input", {
+    let res = await fetch("/api/income", {
       method: "POST",
       body: JSON.stringify(inputState),
     });
