@@ -18,6 +18,6 @@ const calculationSchema: Schema = new mongoose.Schema({
 });
 const Incomes =
   mongoose.models.Incomes ||
-  mongoose.model<Icalculation>("Income", calculationSchema);
+  mongoose.model<Icalculation>("Incomes", calculationSchema);
 
 export default Incomes;
