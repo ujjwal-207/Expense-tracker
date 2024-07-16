@@ -10,6 +10,13 @@ export default async function Page() {
   const expencesData = JSON.parse(JSON.stringify(expences));
   const incomes = await Incomes.find({}).lean();
   const incomeData = JSON.parse(JSON.stringify(incomes));
+  const totalIncome = incomes.reduce((total, item) => total + item.income, 0);
+  const totalExpences = expences.reduce(
+    (total, item) => total + item.expences,
+    0
+  );
+  const saving = totalIncome - totalExpences;
+
   return (
     <div>
       <h1>Expenses</h1>
@@ -28,6 +35,7 @@ export default async function Page() {
           </li>
         ))}
       </ul>
+      <h3>{saving}</h3>
     </div>
   );
 }
