@@ -17,7 +17,7 @@ const expencesSchema: Schema = new mongoose.Schema({
   },
 });
 const Expences =
-  mongoose.models.Account ||
+  mongoose.models.Expences ||
   mongoose.model<Icalculation>("Expences", expencesSchema);
 
 export default Expences;

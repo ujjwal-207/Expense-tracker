@@ -17,7 +17,7 @@ const calculationSchema: Schema = new mongoose.Schema({
   },
 });
 const Incomes =
-  mongoose.models.Account ||
+  mongoose.models.Incomes ||
   mongoose.model<Icalculation>("Income", calculationSchema);
 
 export default Incomes;

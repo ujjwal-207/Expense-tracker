@@ -13,8 +13,8 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 export default function Page() {
-  const [expenceState, setExpenceState] = useState({
-    expence: "",
+  const [expencesState, setExpencesState] = useState({
+    expences: "",
     description: "",
   });
   //Fetching API endPoint
@@ -22,11 +22,11 @@ export default function Page() {
     e.preventDefault();
     let res = await fetch("/api/expences", {
       method: "POST",
-      body: JSON.stringify(expenceState),
+      body: JSON.stringify(expencesState),
     });
   };
   const handelChange = async (e) => {
-    setExpenceState((prev) => ({
+    setExpencesState((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
@@ -49,11 +49,11 @@ export default function Page() {
           <DialogHeader>
             <DialogTitle>Enter About Your Expences</DialogTitle>
             <DialogDescription>
-              <Input onChange={handelChange} />
+              <Input id="description" onChange={handelChange} />
             </DialogDescription>
             <DialogTitle>Enter Your Amount</DialogTitle>
             <DialogDescription>
-              <Input onChange={handelChange} />
+              <Input id="expences" onChange={handelChange} />
               <div className="pt-3">
                 <Button onClick={handelEntry}>Submit</Button>
               </div>
