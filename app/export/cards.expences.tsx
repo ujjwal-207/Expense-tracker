@@ -9,7 +9,7 @@ import {
 
 import React from "react";
 
-const Expencescard = (props) => {
+const Expencescard = ({ Expences }) => {
   return (
     <div>
       <div>
@@ -20,7 +20,7 @@ const Expencescard = (props) => {
                 <CardTitle>Expences</CardTitle>
                 <CardDescription>Your total Expences</CardDescription>
               </CardHeader>
-              <CardContent>{props.Expences}</CardContent>
+              <CardContent>{Expences}</CardContent>
             </Card>
           </div>
         </div>
