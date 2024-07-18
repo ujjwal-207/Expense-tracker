@@ -15,6 +15,7 @@ export default async function Page() {
     (total, item) => total + item.expences,
     0
   );
+
   const saving = totalIncome - totalExpences;
 
   return (

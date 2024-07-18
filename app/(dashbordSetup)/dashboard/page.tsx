@@ -1,40 +1,25 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-const cardDetails = [
-  {
-    title: "Saving",
-    href: "/saving",
-  },
-  {
-    title: "Expences",
-    href: "/expences",
-  },
-  {
-    title: "Income",
-    href: "/income",
-  },
-];
+import { dbConnect } from "@/app/lib/dbConnect";
+import Expences from "@/app/models/expences";
+import Incomes from "@/app/models/calculation";
+import Expencescard from "@/app/export/cards.expences";
 
-export default function Page() {
+export default async function Page() {
+  await dbConnect();
+  const expences = await Expences.find({}).lean();
+  const expencesData = JSON.parse(JSON.stringify(expences));
+  const incomes = await Incomes.find({}).lean();
+  const incomeData = JSON.parse(JSON.stringify(incomes));
+  const totalIncome = incomes.reduce((total, item) => total + item.income, 0);
+  const totalExpences = expences.reduce(
+    (total, item) => total + item.expences,
+    0
+  );
+
+  const saving = totalIncome - totalExpences;
+
   return (
     <div>
-      <div className="flex gap-16">
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 tracking-tight mt-2">
-          {cardDetails.map((details, index) => (
-            <Card key={index}>
-              <CardHeader className="px-4 pt-3 pb-2 xl:py-4 xl:px-6 font-normal">
-                <CardTitle>{details.title}</CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </div>
+      <Expencescard ExpencesData={expencesData} IncomeData={incomeData} />
     </div>
   );
 }

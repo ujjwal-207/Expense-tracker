@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -7,9 +8,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Expencescard = ({ Expences }) => {
+const Expencescard = ({ ExpencesData, IncomeData }) => {
+  const [totalExpence, setTotalExpence] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  useEffect(() => {
+    if (ExpencesData.length > 0 || IncomeData.lenght > 0) {
+      CalculateTotal();
+    }
+  }, [ExpencesData, IncomeData]);
+  const CalculateTotal = () => {
+    const extotal = ExpencesData.reduce(
+      (total, item) => total + item.expences,
+      0
+    );
+    const intotal = IncomeData.reduce((total, item) => total + item.income, 0);
+    setTotalIncome(intotal);
+    setTotalExpence(extotal);
+  };
   return (
     <div>
       <div>
@@ -20,7 +37,21 @@ const Expencescard = ({ Expences }) => {
                 <CardTitle>Expences</CardTitle>
                 <CardDescription>Your total Expences</CardDescription>
               </CardHeader>
-              <CardContent>{Expences}</CardContent>
+              <CardContent>रु{totalExpence}</CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="px-4 pt-3 pb-2 xl:py-4 xl:px-6 font-normal">
+                <CardTitle>Income</CardTitle>
+                <CardDescription>Your total Income</CardDescription>
+              </CardHeader>
+              <CardContent>रु{totalIncome}</CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="px-4 pt-3 pb-2 xl:py-4 xl:px-6 font-normal">
+                <CardTitle>Savings</CardTitle>
+                <CardDescription>Your total Savings</CardDescription>
+              </CardHeader>
+              <CardContent>रु{totalIncome - totalExpence}</CardContent>
             </Card>
           </div>
         </div>
