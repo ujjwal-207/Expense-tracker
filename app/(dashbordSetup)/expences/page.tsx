@@ -11,13 +11,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [expencesState, setExpencesState] = useState({
     expences: "",
     description: "",
   });
+  const [expences, setExpences] = useState([]);
+  const [error, setError] = useState(null);
+  const [isloading, setIsLoading] = useState(false);
   //Fetching API endPoint
   const handelEntry = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +44,31 @@ export default function Page() {
       [e.target.id]: e.target.value,
     }));
   };
+  useEffect(() => {
+    async function fetchExpences() {
+      try {
+        const response = await fetch("/api/expences");
+        if (!response.ok) {
+          throw new Error("Failed to fetch expences");
+        }
+        const data = await response.json();
+        setExpences(data);
+      } catch (error) {
+        console.error("Error fetching expences:", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchExpences();
+  }, []);
+  if (isloading) {
+    return <div>Loading....</div>;
+  }
+  if (error) {
+    return <div>Error:{error}</div>;
+  }
+
   return (
     <div>
       <div className="grid grid-rows-2">
@@ -73,7 +101,13 @@ export default function Page() {
           </DialogContent>
         </Dialog>
         <div>
-          <ExpencesDescription />
+          <ul>
+            {expences.map((expence: any) => (
+              <li key={expence._id}>
+                {expence.description}:रु{expence.expences}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
