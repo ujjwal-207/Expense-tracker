@@ -10,13 +10,13 @@ export default function SidebarLayout({
 }) {
   return (
     <div>
-      <div className="flex">
+      <div className="justify-between flex">
         <div>
-          <Image src={logo} alt="" width={60} height={60} />
+          <Image src={logo} alt="" width={70} height={70} />
           <h2 className="">Ujjwal</h2>
           <p>Your Money</p>
         </div>
-        <div>
+        <div className="mt-11 mr-7">
           <ThemeSwitch />
         </div>
       </div>
