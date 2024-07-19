@@ -3,6 +3,22 @@ import Expences from "@/app/models/expences";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    await dbConnect();
+    const expencesData = await Expences.find({}).lean();
+    return NextResponse.json(expencesData);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        message: "Failed to get data",
+      },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { expences, description } = await request.json();

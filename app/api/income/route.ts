@@ -3,6 +3,21 @@ import Incomes from "@/app/models/calculation";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    await dbConnect();
+    const incomeData = await Incomes.find({}).lean();
+    return NextResponse.json(incomeData);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        message: "Failed to get data",
+      },
+      { status: 500 }
+    );
+  }
+}
 export async function POST(request: NextRequest) {
   try {
     const { income, description } = await request.json();
