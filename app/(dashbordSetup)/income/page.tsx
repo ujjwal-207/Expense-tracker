@@ -19,7 +19,7 @@ export default function Page() {
   });
   const [error, setError] = useState(null);
   const [incomeData, setIncomeData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   //Fetching API endPoint for post
   const handelEntry = async (e) => {
@@ -48,6 +48,8 @@ export default function Page() {
       } catch (error) {
         console.error("Error Fetching:", error);
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     }
     fetchIncome();
@@ -59,8 +61,8 @@ export default function Page() {
     return <div>Error:{error}</div>;
   }
   return (
-    <div>
-      <div>
+    <div className="">
+      <div className="justify-between flex">
         <Dialog>
           <div className=" gap-7 box-content">
             <DialogTrigger asChild>
@@ -89,7 +91,7 @@ export default function Page() {
             </DialogHeader>
           </DialogContent>
         </Dialog>
-        <div>
+        <div className="justify-end gap-5">
           <ul>
             {incomeData.map((income: any) => (
               <li key={income._id}>
