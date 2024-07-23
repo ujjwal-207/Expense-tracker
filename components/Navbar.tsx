@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import {
   Navbar,
   NavbarBrand,
@@ -11,8 +11,16 @@ import Image from "next/image";
 import logo from "@/public/logo.png";
 import ThemeSwitch from "./ThemeSwitch";
 import Link from "next/link";
+import { Button } from "./ui/button";
+
+// import { redirect } from "next/navigation";
+// import { useRouter } from "next/router";
 
 export default function App() {
+  // const router = useRouter();
+  // function handleClick() {
+  //   router.push("/sign-in");
+  // }
   return (
     <Navbar isBordered className="fixed">
       <NavbarBrand>
@@ -26,7 +34,11 @@ export default function App() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">Login</NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          <Link href="/sign-in">
+            <Button>Sign In</Button>
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <ThemeSwitch />
     </Navbar>
