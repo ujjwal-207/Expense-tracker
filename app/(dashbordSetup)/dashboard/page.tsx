@@ -3,7 +3,12 @@ import Expences from "@/app/models/expences";
 import Incomes from "@/app/models/calculation";
 import Expencescard from "@/app/export/cards.expences";
 
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 export default async function Page() {
+  const clerkUser = await currentUser();
+  if (!clerkUser) redirect("/sign-in");
   await dbConnect();
   const expences = await Expences.find({}).lean();
   const expencesData = JSON.parse(JSON.stringify(expences));

@@ -13,14 +13,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-// import { redirect } from "next/navigation";
-// import { useRouter } from "next/router";
-
 export default function App() {
-  // const router = useRouter();
-  // function handleClick() {
-  //   router.push("/sign-in");
-  // }
   return (
     <Navbar isBordered className="fixed">
       <NavbarBrand>

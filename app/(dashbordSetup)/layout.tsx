@@ -23,20 +23,21 @@ export default function SidebarLayout({
           <h2 className="">Ujjwal</h2>
           <p>Your Money</p>
         </div>
-        <div className="mt-11 mr-7">
+        <div className="mt-11 mr-7 flex grid-flow-row">
+          Change Themes
           <ThemeSwitch />
         </div>
-      </div>
-      <hr />
-
-      <div className="flex gap-16">
-        <Sidebar />
         <SignedOut>
           <SignInButton />
         </SignedOut>
         <SignedIn>
           <UserButton />
         </SignedIn>
+      </div>
+      <hr />
+
+      <div className="flex gap-16">
+        <Sidebar />
         {children}
       </div>
     </>
