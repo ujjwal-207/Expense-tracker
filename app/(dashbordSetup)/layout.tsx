@@ -2,13 +2,7 @@ import Sidebar from "@/components/sidebar";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 import ThemeSwitch from "@/components/ThemeSwitch";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function SidebarLayout({
   children,
