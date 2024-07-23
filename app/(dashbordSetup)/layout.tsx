@@ -2,6 +2,8 @@ import Sidebar from "@/components/sidebar";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import { ClerkProvider, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 export default function SidebarLayout({
   children,
@@ -9,7 +11,7 @@ export default function SidebarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <ClerkProvider>
       <div className="justify-between flex">
         <div>
           <Image src={logo} alt="" width={70} height={70} />
@@ -21,10 +23,11 @@ export default function SidebarLayout({
         </div>
       </div>
       <hr />
+
       <div className="flex gap-16">
         <Sidebar />
         {children}
       </div>
-    </div>
+    </ClerkProvider>
   );
 }
