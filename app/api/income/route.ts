@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   try {
     const { income, description } = await request.json();
     await dbConnect();
-    await Incomes.create({ income, description });
+    await Incomes.create({ userId, income, description });
     return NextResponse.json(
       { message: "Message sent sucessfully" },
       { status: 201 }

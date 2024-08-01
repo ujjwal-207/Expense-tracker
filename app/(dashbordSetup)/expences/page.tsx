@@ -1,6 +1,5 @@
 "use client";
 
-import ExpencesDescription from "@/app/export/expences.description";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -21,13 +21,14 @@ export default function Page() {
   const [expences, setExpences] = useState([]);
   const [error, setError] = useState(null);
   const [isloading, setIsLoading] = useState(false);
+  const { userId, isSignedIn } = useAuth();
   //Fetching API endPoint
   const handelEntry = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       let res = await fetch("/api/expences", {
         method: "POST",
-        body: JSON.stringify(expencesState),
+        body: JSON.stringify({ ...expencesState, userId }),
       });
       if (!res.ok) {
         throw new Error("Failed to submit expences");
@@ -44,24 +45,31 @@ export default function Page() {
       [e.target.id]: e.target.value,
     }));
   };
-  useEffect(() => {
-    async function fetchExpences() {
-      try {
-        const response = await fetch("/api/expences");
-        if (!response.ok) {
-          throw new Error("Failed to fetch expences");
-        }
-        const data = await response.json();
-        setExpences(data);
-      } catch (error) {
-        console.error("Error fetching expences:", error);
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
+
+  const fetchExpences = async () => {
+    try {
+      const response = await fetch("/api/expences");
+      if (!response.ok) {
+        throw new Error("Failed to fetch expences");
       }
+      const data = await response.json();
+      setExpences(data);
+    } catch (error) {
+      console.error("Error fetching expences:", error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
-    fetchExpences();
-  }, []);
+  };
+
+  useEffect(() => {
+    if (isSignedIn) {
+      fetchExpences();
+    } else {
+      setIsLoading(false);
+    }
+  }, [isSignedIn]);
+
   if (isloading) {
     return <div>Loading....</div>;
   }
@@ -88,11 +96,19 @@ export default function Page() {
             <DialogHeader>
               <DialogTitle>Enter About Your Expences</DialogTitle>
               <DialogDescription>
-                <Input id="description" onChange={handelChange} />
+                <Input
+                  id="description"
+                  value={expencesState.description}
+                  onChange={handelChange}
+                />
               </DialogDescription>
               <DialogTitle>Enter Your Amount</DialogTitle>
               <DialogDescription>
-                <Input id="expences" onChange={handelChange} />
+                <Input
+                  id="expences"
+                  value={expencesState.expences}
+                  onChange={handelChange}
+                />
                 <div className="pt-3">
                   <Button onClick={handelEntry}>Submit</Button>
                 </div>

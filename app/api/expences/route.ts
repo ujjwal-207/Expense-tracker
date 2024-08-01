@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
   try {
     const { expences, description } = await request.json();
     await dbConnect();
-    await Expences.create({ expences, description });
+    await Expences.create({ userId, expences, description });
     return NextResponse.json(
       { message: "Message sent sucessfully" },
       { status: 201 }
