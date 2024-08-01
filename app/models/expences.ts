@@ -15,6 +15,10 @@ const expencesSchema: Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userid: {
+    type: String,
+    required: true,
+  },
 });
 const Expences =
   mongoose.models.Expences ||

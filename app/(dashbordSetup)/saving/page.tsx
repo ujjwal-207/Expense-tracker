@@ -2,7 +2,7 @@
 
 import { dbConnect } from "@/app/lib/dbConnect";
 import Expences from "@/app/models/expences";
-import Incomes from "@/app/models/calculation";
+import Incomes from "@/app/models/incomes";
 
 export default async function Page() {
   await dbConnect();

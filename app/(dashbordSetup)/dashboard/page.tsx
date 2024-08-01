@@ -1,6 +1,6 @@
 import { dbConnect } from "@/app/lib/dbConnect";
 import Expences from "@/app/models/expences";
-import Incomes from "@/app/models/calculation";
+import Incomes from "@/app/models/incomes";
 import Expencescard from "@/app/export/cards.expences";
 
 import { currentUser } from "@clerk/nextjs/server";
