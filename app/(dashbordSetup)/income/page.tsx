@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Page() {
   const [inputState, setInputState] = useState({
@@ -20,14 +21,31 @@ export default function Page() {
   const [error, setError] = useState(null);
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { userId, isSignedIn } = useAuth();
 
   //Fetching API endPoint for post
   const handelEntry = async (e) => {
     e.preventDefault();
-    let res = await fetch("/api/income", {
-      method: "POST",
-      body: JSON.stringify(inputState),
-    });
+    if (!userId) {
+      console.log("not authorized");
+      return;
+    }
+    try {
+      let res = await fetch("/api/income", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application.json",
+        },
+        body: JSON.stringify({ ...inputState, userId }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to submit the data");
+      }
+      setInputState({ income: "", description: "" });
+      fetchIncome();
+    } catch (error) {
+      console.error("Error submitting income", error);
+    }
   };
   const handelChange = async (e) => {
     setInputState((prev) => ({
@@ -36,24 +54,31 @@ export default function Page() {
     }));
   };
   //For GET
-  useEffect(() => {
-    async function fetchIncome() {
-      try {
-        const response = await fetch("/api/income");
-        if (!response.ok) {
-          throw new Error("Failed to fetch the /income");
-        }
-        const data = await response.json();
-        setIncomeData(data);
-      } catch (error) {
-        console.error("Error Fetching:", error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
+
+  const fetchIncome = async () => {
+    try {
+      const response = await fetch("/api/income");
+      if (!response.ok) {
+        throw new Error("Failed to fetch the /income");
       }
+      const data = await response.json();
+      setIncomeData(data);
+    } catch (error) {
+      console.error("Error Fetching:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
-    fetchIncome();
-  }, []);
+  };
+
+  useEffect(() => {
+    if (isSignedIn) {
+      fetchIncome();
+    } else {
+      setLoading(false);
+    }
+  }, [isSignedIn]);
+
   if (loading) {
     return <div>Loading.....</div>;
   }

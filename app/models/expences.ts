@@ -3,6 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface Icalculation extends Document {
   expences: number;
   description: string;
+  userId: string;
 }
 const expencesSchema: Schema = new mongoose.Schema({
   expences: {
@@ -15,7 +16,7 @@ const expencesSchema: Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userid: {
+  userId: {
     type: String,
     required: true,
   },

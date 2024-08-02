@@ -25,9 +25,16 @@ export default function Page() {
   //Fetching API endPoint
   const handelEntry = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!userId) {
+      console.error("user is not signed in");
+      return;
+    }
     try {
       let res = await fetch("/api/expences", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ ...expencesState, userId }),
       });
       if (!res.ok) {
@@ -35,6 +42,7 @@ export default function Page() {
       }
       //To Clear the form after sucessfull submission
       setExpencesState({ expences: "", description: "" });
+      fetchExpences();
     } catch (error) {
       console.error("Error Submitting expense", error);
     }

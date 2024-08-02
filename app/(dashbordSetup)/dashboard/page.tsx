@@ -9,10 +9,11 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
+  const userId = clerkUser.id;
   await dbConnect();
-  const expences = await Expences.find({}).lean();
+  const expences = await Expences.find({ userId }).lean();
   const expencesData = JSON.parse(JSON.stringify(expences));
-  const incomes = await Incomes.find({}).lean();
+  const incomes = await Incomes.find({ userId }).lean();
   const incomeData = JSON.parse(JSON.stringify(incomes));
   const totalIncome = incomes.reduce((total, item) => total + item.income, 0);
   const totalExpences = expences.reduce(
