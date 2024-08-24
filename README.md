@@ -1,4 +1,4 @@
-#Expences-Tracker
+# Expences-Tracker
 
 Expence-Tracker is the app to track your income and expences
 
